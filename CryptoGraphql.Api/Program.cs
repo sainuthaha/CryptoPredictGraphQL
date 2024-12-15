@@ -21,7 +21,7 @@ builder.Services.AddStorageService(configuration);
 builder.Services.AddHttpClient<ICryptoPriceService,CryptoPriceService>(configuration);
 builder.Services.AddSingleton<ISchema, CryptoPriceSchema>(services => new CryptoPriceSchema(services.GetRequiredService<IServiceProvider>()));
 builder.Services.AddSingleton<UserScoreDataType>();
-builder.Services.AddSingleton<ISchema, UserScoreSchema>(services => new UserScoreSchema(services.GetRequiredService<IServiceProvider>()));
+// builder.Services.AddSingleton<ISchema, UserScoreSchema>(services => new UserScoreSchema(services.GetRequiredService<IServiceProvider>()));
 builder.Services.AddSingleton<CryptoPriceQuery>();
 builder.Services.AddSingleton<MarketRangeType>();
 builder.Services.AddSingleton<PricePointType>();
