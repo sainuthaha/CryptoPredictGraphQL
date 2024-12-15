@@ -5,7 +5,7 @@ using GraphQL.Types;
 
 public class CryptoPriceQuery : ObjectGraphType
 {
-    public CryptoPriceQuery(ICryptoPriceService cryptoPriceService)
+    public CryptoPriceQuery(ICryptoPriceService cryptoPriceService,IUserScoreDataService userScoreDataService)
     {
         Field<FloatGraphType>(
             "currentPrice",
@@ -35,5 +35,18 @@ public class CryptoPriceQuery : ObjectGraphType
                 var toEpoch = context.GetArgument<long>("toEpoch");
                 return cryptoPriceService.GetEthMarketRange(fromEpoch, toEpoch).GetAwaiter().GetResult();
             });
+
+        FieldAsync<UserScoreDataType>(
+            "userScoreData", // Field name
+            arguments: new QueryArguments(
+                new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "userId" }
+            ),
+            resolve: async context =>
+            {
+                var userId = context.GetArgument<string>("userId");
+                // Get user score data asynchronously
+                return await userScoreDataService.GetUserScoreData(userId); 
+            }
+        );
     }
 }

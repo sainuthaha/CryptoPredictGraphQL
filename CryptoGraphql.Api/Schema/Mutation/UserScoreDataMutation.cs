@@ -10,7 +10,7 @@ public class UserScoreDataMutation : ObjectGraphType
         Field<UserScoreDataType>(
             "updateUserScoreData",
             arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<UserScoreDataType>> { Name = "userScoreData" }
+                new QueryArgument<NonNullGraphType<UserScoreDataInputType>> { Name = "userScoreData" }
             ),
             resolve: context =>
             {
